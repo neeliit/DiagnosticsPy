@@ -81,11 +81,11 @@ class classifiers ():
 
         #.......Predict the Test set result.......#
         y_pred = classifier.predict(x_test)
-        y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
+        #y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
 
         #.................Score..................#
-        scores = self.scores(y_test, y_pred, x_train)
-        return(y_pred,scores)
+        #scores = self.scores(y_test, y_pred, x_train)
+        return(y_pred)
     
     
         
