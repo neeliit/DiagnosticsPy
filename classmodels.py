@@ -19,7 +19,7 @@ class classifiers ():
     
     def scores(self, y_test, y_pred, y_pred_quant):
         #y_pred = self.fit(x_train, x_test, y_train)
-        from sklearn.metrics import confusion_matrix, accuracy_score, auc
+        from sklearn.metrics import confusion_matrix, accuracy_score, auc, roc_curve
         global cm
         cm = confusion_matrix(y_test,y_pred)
         total=sum(sum(cm))
@@ -46,7 +46,7 @@ class classifiers ():
         NLR = (1-sens)/spec
 
          #..........Area Under the curve (AUC)...............#
-        fpr, tpr = (1-spec), sens 
+        fpr, tpr = roc_curve(y_test, y_pred_quant)
         AUC = auc(fpr, tpr)
 
         # scoresdict = {
