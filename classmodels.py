@@ -19,19 +19,19 @@ class classifiers ():
     
     def scores(self, y_test, y_pred, y_pred_quant):
         #y_pred = self.fit(x_train, x_test, y_train)
-        from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+        from sklearn.metrics import confusion_matrix, accuracy_score, auc
         global cm
         cm = confusion_matrix(y_test,y_pred)
         total=sum(sum(cm))
         
         #.....................Accuracy......................#
-        accuracy = accuracy_score(y_test,y_pred)
+        accur = accuracy_score(y_test,y_pred)
         
        #.....................Senstivity.....................#
-        sensitivity = cm[0,0]/(cm[0,0]+cm[1,0])
+        sens = cm[0,0]/(cm[0,0]+cm[1,0])
 
         #.....................Specificity...................#
-        specificity = cm[1,1]/(cm[1,1]+cm[0,1])
+        spec = cm[1,1]/(cm[1,1]+cm[0,1])
 
         #..........Positive predictive value (PPV)...........#
         PPV = cm[0,0]/(cm[0,0]+cm[0,1])
@@ -46,8 +46,8 @@ class classifiers ():
         NLR = (1-sensitivity)/specificity
 
          #..........Area Under the curve (AUC)...............#
-        fpr, tpr = metrics.roc_curve(y_test, y_pred_quant)
-        AUC = metrics.auc(fpr, tpr)
+        fpr, tpr = (1-spec), sens 
+        AUC = auc(fpr, tpr)
 
         # scoresdict = {
         #     'MAE': MAE,
@@ -57,7 +57,7 @@ class classifiers ():
         #     'R-sqr':r2,
         #     'Adj_R2': Adj_R2
         # }
-        errorList = np.array([accuracy, sensitivity, specificity, AUC, PPV, NPV, PLR, NLR])
+        errorList = np.array([accur, sens, spec, AUC, PPV, NPV, PLR, NLR])
         return(errorList)
     #......................Logistic regression.....................#
     def logreg(self, x_train, x_test, y_train, y_test):
