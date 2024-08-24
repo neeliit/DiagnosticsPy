@@ -40,10 +40,10 @@ class classifiers ():
         NPV = cm[1,1]/(cm[1,1]+cm[1,0])
         
         #..........Positive Likelihood ratio (PLR)...........#
-        PLR = sensitivity/(1-specificity)
+        PLR = sens/(1-spec)
 
         #..........Negative Likelihood ratio (NLR)...........#
-        NLR = (1-sensitivity)/specificity
+        NLR = (1-sens)/spec
 
          #..........Area Under the curve (AUC)...............#
         fpr, tpr = (1-spec), sens 
