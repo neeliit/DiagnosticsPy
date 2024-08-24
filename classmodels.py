@@ -25,15 +25,12 @@ class classifiers ():
         
         #.....................Accuracy......................#
         accuracy = accuracy_score(y_test,y_pred)
-        print('Accuracy : ', accuracy )
-
+        
        #.....................Senstivity.....................#
         sensitivity = cm[0,0]/(cm[0,0]+cm[0,1])
-        print('Sensitivity : ', sensitivity )
 
         #.....................Specificity...................#
         specificity = cm[1,1]/(cm[1,0]+cm[1,1])
-        print('Specificity : ', specificity)
         
         #.....................R-Square .....................#
         r2 = round(r2_score(y_test,y_pred),2)
