@@ -45,7 +45,10 @@ class classifiers ():
         #..........Negative Likelihood ratio (NLR)...........#
         NLR = (1-sensitivity)/specificity
 
-       
+         #..........Area Under the curve (AUC)...............#
+        fpr, tpr = metrics.roc_curve(y_test, y_pred_quant)
+        AUC = metrics.auc(fpr, tpr)
+
         # scoresdict = {
         #     'MAE': MAE,
         #     'MSE': MSE,
@@ -54,7 +57,7 @@ class classifiers ():
         #     'R-sqr':r2,
         #     'Adj_R2': Adj_R2
         # }
-        errorList = np.array([accuracy, sensitivity, specificity, PPV, NPV, PLR, NLR])
+        errorList = np.array([accuracy, sensitivity, specificity, AUC, PPV, NPV, PLR, NLR])
         return(errorList)
     #......................Logistic regression.....................#
     def logreg(self, x_train, x_test, y_train, y_test):
