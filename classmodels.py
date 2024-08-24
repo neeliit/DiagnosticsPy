@@ -1,6 +1,6 @@
 import numpy as np
 
-class classifiers():
+class classifiers ():
     def __init__(self,x_train, x_test, y_train, y_test):
         self.x_train = x_train
         self.x_test = x_test
@@ -65,11 +65,11 @@ class classifiers():
 
         #.......Predict the Test set result.......#
         y_pred = classifier.predict(x_test)
-        y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
+        #y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
 
     #.................Score..................#
-        scores = self.scores(y_test, y_pred, x_train)
-        return(y_pred,scores)
+        #scores = self.scores(y_test, y_pred, x_train)
+        return(y_pred)
         # fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred_quant)
         # metrics.auc(fpr, tpr)
 
