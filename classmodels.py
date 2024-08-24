@@ -17,9 +17,9 @@ class classifiers ():
         cross_val_list = np.array([score.mean(), score.std()])
         return(cross_val_list)
     
-    def scores(self, y_test, y_pred, x_train):
+    def scores(self, y_test, y_pred, y_pred_quant):
         #y_pred = self.fit(x_train, x_test, y_train)
-        from sklearn.metrics import confusion_matrix, accuracy_score, r2_score
+        from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
         global cm
         cm = confusion_matrix(y_test,y_pred)
         total=sum(sum(cm))
@@ -67,10 +67,10 @@ class classifiers ():
 
         #.......Predict the Test set result.......#
         y_pred = classifier.predict(x_test)
-        #y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
+        y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
 
     #.................Score..................#
-        scores = self.scores(y_test, y_pred, x_train)
+        scores = self.scores(y_test, y_pred, y_pred_quant)
         return(y_pred,scores,cm)
         # fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred_quant)
         # metrics.auc(fpr, tpr)
@@ -83,10 +83,10 @@ class classifiers ():
 
         #.......Predict the Test set result.......#
         y_pred = classifier.predict(x_test)
-        #y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
+        y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
 
         #.................Score..................#
-        scores = self.scores(y_test, y_pred, x_train)
+        scores = self.scores(y_test, y_pred, y_pred_quant)
         return(y_pred,scores,cm)
     
     
