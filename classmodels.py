@@ -31,6 +31,12 @@ class classifiers ():
 
         #.....................Specificity...................#
         specificity = cm[1,1]/(cm[1,0]+cm[1,1])
+
+        #..........Positive predictive value (PPV)...........#
+        specificity = cm[1,1]/(cm[1,0]+cm[1,1])
+
+        #..........negative predictive value (NPV)...........#
+        specificity = cm[1,1]/(cm[1,0]+cm[1,1])
         
         #.....................R-Square .....................#
         r2 = round(r2_score(y_test,y_pred),2)
@@ -53,7 +59,7 @@ class classifiers ():
         # }
         errorList = np.array([accuracy, sensitivity, specificity, r2, Adj_R2])
         # errorsName = ['MAE','MSE','RMSE','RMSELog','R-sqr','Adj_R2']
-        return(errorList)
+        return(errorList,cm)
     #......................Logistic regression.....................#
     def logreg(self, x_train, x_test, y_train, y_test):
         from sklearn.linear_model import LogisticRegression
