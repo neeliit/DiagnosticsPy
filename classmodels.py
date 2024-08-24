@@ -21,18 +21,18 @@ class classifiers ():
         #y_pred = self.fit(x_train, x_test, y_train)
         from sklearn.metrics import confusion_matrix, accuracy_score, r2_score
         cm = confusion_matrix(y_test,y_pred)
-        total=sum(sum(confusion_matrix))
+        total=sum(sum(cm))
         
         #.....................Accuracy......................#
         accuracy = accuracy_score(y_test,y_pred)
         print('Accuracy : ', accuracy )
 
        #.....................Senstivity.....................#
-        sensitivity = confusion_matrix[0,0]/(confusion_matrix[0,0]+confusion_matrix[0,1])
+        sensitivity = cm[0,0]/(cm[0,0]+cm[0,1])
         print('Sensitivity : ', sensitivity )
 
         #.....................Specificity...................#
-        specificity = confusion_matrix[1,1]/(confusion_matrix[1,0]+confusion_matrix[1,1])
+        specificity = cm[1,1]/(cm[1,0]+cm[1,1])
         print('Specificity : ', specificity)
         
         #.....................R-Square .....................#
@@ -68,8 +68,8 @@ class classifiers ():
         #y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
 
     #.................Score..................#
-        #scores = self.scores(y_test, y_pred, x_train)
-        return(y_pred)
+        scores = self.scores(y_test, y_pred, x_train)
+        return(y_pred,scores)
         # fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred_quant)
         # metrics.auc(fpr, tpr)
 
@@ -84,8 +84,8 @@ class classifiers ():
         #y_pred_quant = classifier.predict_proba(x_test)[:, 1] #Only keep the first column, which is the 'pos' values
 
         #.................Score..................#
-        #scores = self.scores(y_test, y_pred, x_train)
-        return(y_pred)
+        scores = self.scores(y_test, y_pred, x_train)
+        return(y_pred,scores)
     
     
         
