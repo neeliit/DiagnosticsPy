@@ -28,28 +28,24 @@ class classifiers ():
         accuracy = accuracy_score(y_test,y_pred)
         
        #.....................Senstivity.....................#
-        sensitivity = cm[0,0]/(cm[0,0]+cm[0,1])
+        sensitivity = cm[0,0]/(cm[0,0]+cm[1,0])
 
         #.....................Specificity...................#
-        specificity = cm[1,1]/(cm[1,0]+cm[1,1])
+        specificity = cm[1,1]/(cm[1,1]+cm[0,1])
 
         #..........Positive predictive value (PPV)...........#
-        specificity = cm[1,1]/(cm[1,0]+cm[1,1])
+        PPV = cm[0,0]/(cm[0,0]+cm[0,1])
 
         #..........negative predictive value (NPV)...........#
-        specificity = cm[1,1]/(cm[1,0]+cm[1,1])
+        NPV = cm[1,1]/(cm[1,1]+cm[1,0])
         
-        #.....................R-Square .....................#
-        r2 = round(r2_score(y_test,y_pred),2)
+        #..........Positive Likelihood ratio (PLR)...........#
+        PLR = sensitivity/(1-specificity)
 
-        #..................Adjusted R-sqaure.................#
-        # number of observations
-        # number of independent variables
-        # r2 is r sqaure calculated previously
-        n = x_train.shape[0]
-        k = x_train.shape[1]
-        Adj_R2 = round(1 - ((1-r2)*(n-1)/(n-k-1)),2)
+        #..........Negative Likelihood ratio (NLR)...........#
+        NLR = (1-sensitivity)/specificity
 
+       
         # scoresdict = {
         #     'MAE': MAE,
         #     'MSE': MSE,
@@ -58,8 +54,7 @@ class classifiers ():
         #     'R-sqr':r2,
         #     'Adj_R2': Adj_R2
         # }
-        errorList = np.array([accuracy, sensitivity, specificity, r2, Adj_R2])
-        # errorsName = ['MAE','MSE','RMSE','RMSELog','R-sqr','Adj_R2']
+        errorList = np.array([accuracy, sensitivity, specificity, PPV, NPV, PLR, NLR])
         return(errorList)
     #......................Logistic regression.....................#
     def logreg(self, x_train, x_test, y_train, y_test):
