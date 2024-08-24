@@ -20,6 +20,7 @@ class classifiers ():
     def scores(self, y_test, y_pred, x_train):
         #y_pred = self.fit(x_train, x_test, y_train)
         from sklearn.metrics import confusion_matrix, accuracy_score, r2_score
+        global cm
         cm = confusion_matrix(y_test,y_pred)
         total=sum(sum(cm))
         
@@ -59,7 +60,7 @@ class classifiers ():
         # }
         errorList = np.array([accuracy, sensitivity, specificity, r2, Adj_R2])
         # errorsName = ['MAE','MSE','RMSE','RMSELog','R-sqr','Adj_R2']
-        return(errorList,cm)
+        return(errorList)
     #......................Logistic regression.....................#
     def logreg(self, x_train, x_test, y_train, y_test):
         from sklearn.linear_model import LogisticRegression
@@ -72,7 +73,7 @@ class classifiers ():
 
     #.................Score..................#
         scores = self.scores(y_test, y_pred, x_train)
-        return(y_pred,scores)
+        return(y_pred,scores,cm)
         # fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred_quant)
         # metrics.auc(fpr, tpr)
 
@@ -88,7 +89,7 @@ class classifiers ():
 
         #.................Score..................#
         scores = self.scores(y_test, y_pred, x_train)
-        return(y_pred,scores)
+        return(y_pred,scores,cm)
     
     
         
