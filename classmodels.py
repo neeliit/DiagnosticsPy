@@ -71,7 +71,7 @@ class classifiers ():
 
     #.................Score..................#
         scores = self.scores(y_test, y_pred, y_pred_quant)
-        return(y_pred,scores,cm)
+        return(y_pred,scores,y_pred_quant)
         # fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred_quant)
         # metrics.auc(fpr, tpr)
 
@@ -87,11 +87,11 @@ class classifiers ():
 
         #.................Score..................#
         scores = self.scores(y_test, y_pred, y_pred_quant)
-        return(y_pred,scores,cm)
+        return(y_pred,scores,y_pred_quant)
     
     
         
-    def lr(self, x_train, x_test, y_train, y_test):
+    def rocplot(self, x_train, x_test, y_train, y_test):
         #..........Training the Simple Linear Regression model on Training set.....#
         from sklearn.linear_model import LinearRegression
         reg = LinearRegression(fit_intercept=True)  
