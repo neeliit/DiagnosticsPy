@@ -71,7 +71,7 @@ class classifiers ():
 
     #.................Score..................#
         scores = self.scores(y_test, y_pred, y_pred_quant)
-        return(y_pred,scores,y_pred_quant)
+        return(y_pred,scores,y_pred_quant,cm)
         # fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred_quant)
         # metrics.auc(fpr, tpr)
 
@@ -87,7 +87,7 @@ class classifiers ():
 
         #.................Score..................#
         scores = self.scores(y_test, y_pred, y_pred_quant)
-        return(y_pred,scores,y_pred_quant)
+        return(y_pred,scores,y_pred_quant,cm)
     
     
         
